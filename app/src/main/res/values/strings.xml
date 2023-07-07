@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Mist</string>
+    <string name="song_name">Song Name</string>
+    <string name="author_name">Author Name</string>
+    <string name="todo">TODO</string>
+    <string name="view_mode">view_mode</string>
+    <string name="add_song">Add Song</string>
+    <string name="worship_team_helper">WORSHIP\nTEAM\nHELPER</string>
+    <string name="we_play">We Play!</string>
+    <string name="click_to_start">click to start</string>
+    <string name="title_activity_add_song_one">AddSongActivityOne</string>
+</resources>

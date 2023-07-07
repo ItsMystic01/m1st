@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MainAppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+
+    <style name="BottomNavigation" parent="Theme.Material3.DayNight">
+        <item name="backgroundTint">#B4A592</item>
+        <item name="tintMode">@color/white</item>
+        <item name="rippleColor">@color/white</item>
+    </style>
+
+</resources>
