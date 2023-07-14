@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="10dp"
     android:layout_margin="5dp">
 
@@ -28,6 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/songImage"
             android:layout_centerHorizontal="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/song_name"
             android:textStyle="bold" />
 
@@ -39,6 +41,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/author_name"
             android:textStyle="bold" />
 

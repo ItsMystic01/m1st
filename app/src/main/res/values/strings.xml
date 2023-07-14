@@ -9,4 +9,10 @@
     <string name="we_play">We Play!</string>
     <string name="click_to_start">click to start</string>
     <string name="title_activity_add_song_one">AddSongActivityOne</string>
+    <string name="new_song">New Song</string>
+    <string name="song_author">Song Author</string>
+    <string name="lyrics_and_chords">Lyrics and Chords</string>
+    <string name="song_title">song_title</string>
+    <string name="pick_an_image">Pick an Image</string>
+    <string name="image_picked">Image Picked</string>
 </resources>

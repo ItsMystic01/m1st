@@ -2,9 +2,13 @@ package Mystical.Mist.SongManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import Mystical.Mist.Functionalities.IntentsFunctionality;
 import Mystical.Mist.R;
 
 public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerViewAdapter.ViewHolder> {
@@ -20,27 +25,31 @@ public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerVi
     private ArrayList<Song> songArrayList = new ArrayList<>();
     private Context context;
 
-
     public SongRecyclerViewAdapter(Context context) {
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SongRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.songs_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        IntentsFunctionality intentsFunctionality = new IntentsFunctionality();
+
+        if(songArrayList.get(position).getSongImageCover() != null) {
+            byte[] imageBytes = songArrayList.get(position).getSongImageCover();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            Bitmap rotatedBitmap = intentsFunctionality.rotateBitmapByOrientation(bitmap, songArrayList.get(position).getSongImageOrientation());
+            holder.songImageView.setImageBitmap(rotatedBitmap);
+        }
         holder.songTxtName.setText(songArrayList.get(position).getSongName());
         holder.songAuthorName.setText(songArrayList.get(position).getSongAuthor());
-        holder.parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        holder.parent.setOnClickListener(view -> {
+            intentsFunctionality.viewSongIntent(context, songArrayList, position);
         });
     }
 
@@ -51,11 +60,13 @@ public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerVi
     public void setSongs(ArrayList<Song> songArrayList) { this.songArrayList = songArrayList; notifyDataSetChanged(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView songTxtName;
-        private TextView songAuthorName;
-        private CardView parent;
+        private final ImageView songImageView;
+        private final TextView songTxtName;
+        private final TextView songAuthorName;
+        private final CardView parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            songImageView = itemView.findViewById(R.id.songImage);
             songTxtName = itemView.findViewById(R.id.songTxtName);
             songAuthorName = itemView.findViewById(R.id.songAuthorName);
             parent = itemView.findViewById(R.id.parent);

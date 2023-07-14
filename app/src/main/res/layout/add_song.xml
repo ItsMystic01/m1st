@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#302326"
+    android:padding="10dp"
+    android:textAlignment="gravity"
+    tools:context=".Activities.AddSongActivity">
+
+    <ImageView
+        android:id="@+id/additional_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@mipmap/background_addition" />
+
+    <TextView
+        android:id="@+id/worship_team_helper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/barlow_condensed_bold"
+        android:text="@string/new_song"
+        android:textAlignment="center"
+        android:textColor="#DB7558"
+        android:textSize="80sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/songName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/songAuthor"
+        android:layout_centerHorizontal="true"
+        android:autofillHints=""
+        android:ems="15"
+        android:hint="@string/song_name"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#FF8989" />
+
+    <EditText
+        android:id="@+id/songAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/lyricsAndChords"
+        android:layout_centerHorizontal="true"
+        android:autofillHints=""
+        android:ems="15"
+        android:hint="@string/song_author"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#FF8989" />
+
+    <EditText
+        android:id="@+id/lyricsAndChords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:autofillHints=""
+        android:ems="15"
+        android:gravity="start"
+        android:hint="@string/lyrics_and_chords"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:singleLine="false"
+        android:textColorHint="#FF8989" />
+
+    <Button
+        android:id="@+id/addImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lyricsAndChords"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#DB7558"
+        android:text="@string/pick_an_image" />
+
+    <TextView
+        android:id="@+id/image_picked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/addImageButton"
+        android:fontFamily="@font/barlow_condensed_bold"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="#DB7558"
+        android:textSize="20sp"
+        android:layout_marginBottom="25sp"
+        android:layout_marginEnd="100sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addSongButton"
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/image_picked"
+        android:backgroundTint="#DB7558"
+        android:text="@string/add_song"
+        app:icon="@drawable/addition_sign" />
+
+</RelativeLayout>
