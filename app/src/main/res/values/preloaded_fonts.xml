@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/anonymous_pro_bold</item>
         <item>@font/architects_daughter</item>
         <item>@font/barlow_condensed_bold</item>
         <item>@font/beth_ellen</item>

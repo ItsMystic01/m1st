@@ -7,6 +7,7 @@
     android:padding="10dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="10dp"
+    app:cardBackgroundColor="@color/peach"
     android:layout_margin="5dp">
 
     <RelativeLayout
@@ -19,7 +20,8 @@
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/todo"
-            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:paddingHorizontal="10dp"
             android:src="@drawable/ic_launcher_background" />
 
         <TextView
@@ -28,9 +30,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/songImage"
             android:layout_centerHorizontal="true"
+            android:fontFamily="@font/anonymous_pro_bold"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/song_name"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <TextView
@@ -41,10 +46,12 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/anonymous_pro_bold"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/author_name"
-            android:textStyle="bold" />
+            android:textColor="@color/white"
+            android:textStyle="bold|italic" />
 
     </RelativeLayout>
 

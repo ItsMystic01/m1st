@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -20,10 +21,15 @@
         <activity
             android:name=".Activities.AddSongActivity"
             android:parentActivityName=".Activities.MainActivity" />
-        <activity
-            android:name=".Activities.ViewSong" />
+        <activity android:name=".Activities.ViewSong" />
         <activity
             android:name=".Activities.SongListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LineUpListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.FavoritesListActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"

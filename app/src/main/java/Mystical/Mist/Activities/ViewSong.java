@@ -1,7 +1,10 @@
 package Mystical.Mist.Activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,8 +17,7 @@ import Mystical.Mist.SQLiteManager.SQLiteManager;
 
 public class ViewSong extends AppCompatActivity {
 
-    private TextView viewSongName, viewSongAuthor, viewSongLyricsAndChords;
-    private String name, author, lyricsAndChords;
+    private TextView viewSongName, viewSongAuthor, viewSongContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,21 +26,23 @@ public class ViewSong extends AppCompatActivity {
 
         viewSongName = findViewById(R.id.songTitle);
         viewSongAuthor = findViewById(R.id.songAuthor);
-        viewSongLyricsAndChords = findViewById(R.id.songLyricsAndChords);
+        viewSongContent = findViewById(R.id.songContent);
 
         getAndSetIntentData();
+
+        viewSongContent.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public void getAndSetIntentData() {
         if(getIntent().hasExtra("songName") && getIntent().hasExtra("songAuthor")
-                && getIntent().hasExtra("songLyricsAndChords")) {
-            name = getIntent().getStringExtra("songName");
-            author = getIntent().getStringExtra("songAuthor");
-            lyricsAndChords = getIntent().getStringExtra("songLyricsAndChords");
+                && getIntent().hasExtra("songContent")) {
+            String name = getIntent().getStringExtra("songName");
+            String author = getIntent().getStringExtra("songAuthor");
+            String content = getIntent().getStringExtra("songContent");
 
             viewSongName.setText(name);
             viewSongAuthor.setText(author);
-            viewSongLyricsAndChords.setText(lyricsAndChords);
+            viewSongContent.setText(content);
         }
     }
 }

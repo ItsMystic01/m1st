@@ -5,31 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity"
-    android:padding="10dp">
+    android:background="@color/maroon">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@mipmap/additional_background_for_rest"
+        android:contentDescription="@string/todo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/songsRecView"
+        android:padding="10dp"
         />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+        android:padding="10dp">
 
     <!-- Main content -->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_button"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/peach"
+            android:contentDescription="@string/add_song"
+            app:fabCustomSize="@android:dimen/app_icon_size"
+            app:fabSize="mini"
+            app:rippleColor="@color/peach"
+            app:srcCompat="@drawable/eye" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <ImageView
+        android:id="@+id/empty_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:fabSize="mini"
-        app:fabCustomSize="@android:dimen/app_icon_size"
-        android:contentDescription="@string/add_song"
-        app:srcCompat="@drawable/eye"/>
+        android:layout_centerInParent="true"
+        android:layout_marginTop="250sp"
+        android:contentDescription="@string/empty"
+        android:src="@mipmap/empty"
+        android:alpha="0.5"
+        app:tint="@color/gray" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/no_data_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/empty_icon"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="casual"
+        android:text="@string/no_data"
+        android:textColor="@color/gray"
+        android:textSize="25sp" />
 
 </RelativeLayout>

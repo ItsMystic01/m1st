@@ -6,14 +6,14 @@ public class Song {
 
     private String songName;
     private String songAuthor;
-    private String songLyricsAndChords;
+    private String songContent;
     private byte[] songImageCover;
     private int songImageOrientation;
 
-    public Song(String songName, String songAuthor, String songLyricsAndChords, byte[] songImageCover, int songImageOrientation) {
+    public Song(String songName, String songAuthor, String songContent, byte[] songImageCover, int songImageOrientation) {
         this.songName = songName;
         this.songAuthor = songAuthor;
-        this.songLyricsAndChords = songLyricsAndChords;
+        this.songContent = songContent;
         this.songImageCover = songImageCover;
         this.songImageOrientation = songImageOrientation;
     }
@@ -34,9 +34,9 @@ public class Song {
         this.songAuthor = songAuthor;
     }
 
-    public String getSongLyricsAndChords() { return songLyricsAndChords; }
+    public String getSongContent() { return songContent; }
 
-    public void setSongLyricsAndChords(String songLyricsAndChords) { this.songLyricsAndChords = songLyricsAndChords; }
+    public void setSongContent(String songContent) { this.songContent = songContent; }
 
     public byte[] getSongImageCover() {
         return songImageCover;
@@ -52,16 +52,5 @@ public class Song {
 
     public void setSongImageOrientation(int songImageOrientation) {
         this.songImageOrientation = songImageOrientation;
-    }
-
-    @Override
-    public String toString() {
-        return "Song{" +
-                "songName='" + songName + '\'' +
-                ", songAuthor='" + songAuthor + '\'' +
-                ", songLyricsAndChords='" + songLyricsAndChords + '\'' +
-                ", songImageCover='" + Arrays.toString(songImageCover) + '\'' +
-                ", songImageOrientation='" + songImageOrientation +
-                '}';
     }
 }

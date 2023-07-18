@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Song List">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_option_lyrics"
+                    android:enabled="true"
+                    android:icon="@drawable/lyrics"
+                    android:title="@string/lyrics_only"
+                    />
+                <item
+                    android:id="@+id/nav_option_chords"
+                    android:enabled="true"
+                    android:icon="@drawable/chords"
+                    android:title="@string/chords_only"
+                    />
+                <item
+                    android:id="@+id/nav_option_lyrics_and_chords"
+                    android:enabled="true"
+                    android:icon="@drawable/lyrics_and_chords"
+                    android:title="@string/lyrics_and_chords"
+                    />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Modification">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_option_add_song"
+                    android:enabled="true"
+                    android:icon="@drawable/addition_sign"
+                    android:title="@string/add_song"
+                    />
+                <item
+                    android:id="@+id/nav_option_modify_song"
+                    android:enabled="true"
+                    android:icon="@drawable/settings"
+                    android:title="@string/modify_song"
+                    />
+            </group>
+        </menu>
+    </item>
+    <item android:title="Personal">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_option_line_up"
+                    android:icon="@drawable/line_up"
+                    android:title="@string/line_up"
+                    />
+                <item
+                    android:id="@+id/nav_option_favorites"
+                    android:icon="@drawable/favorites"
+                    android:title="@string/favorites"
+                    />
+            </group>
+        </menu>
+    </item>
+</menu>

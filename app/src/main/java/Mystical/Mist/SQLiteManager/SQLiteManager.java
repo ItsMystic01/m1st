@@ -11,61 +11,67 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class SQLiteManager extends SQLiteOpenHelper {
 
-    private final Context context;
     private static final String DATABASE_NAME = "SongLibrary.db";
     private static final int DATABASE_VERSION = 1;
+    private final String LYRICS_AND_CHORDS = "lyrics_and_chords";
+    private final String LYRICS = "lyrics";
+    private final String CHORDS = "chords";
+    private final String LINE_UP = "line_up";
+    private final String FAVORITES = "favorites";
 
-    private static final String TABLE_NAME = "song_list";
-    private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_TITLE = "song_title";
-    private static final String COLUMN_AUTHOR = "song_author";
-    private static final String COLUMN_LYRICS_AND_CHORDS = "lyrics_and_chords";
-    private static final String COLUMN_IMAGE_COVER = "song_image_cover";
-    private static final String COLUMN_IMAGE_ORIENTATION = "song_image_orientation";
-
+    private final Context CONTEXT;
+    private SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
     public SQLiteManager(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
+        this.CONTEXT = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        String query = "CREATE TABLE " + TABLE_NAME + " (" +
-                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_TITLE + " TEXT, " +
-                        COLUMN_AUTHOR + " TEXT, " +
-                        COLUMN_LYRICS_AND_CHORDS + " TEXT, " +
-                        COLUMN_IMAGE_COVER + " BLOB, " +
-                        COLUMN_IMAGE_ORIENTATION + " INTEGER);";
-        database.execSQL(query);
+        createDatabaseTables(database);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase database, int i, int i1) {
-        database.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        database.execSQL("DROP TABLE IF EXISTS " + LYRICS_AND_CHORDS);
+        database.execSQL("DROP TABLE IF EXISTS " + LYRICS);
+        database.execSQL("DROP TABLE IF EXISTS " + CHORDS);
+        database.execSQL("DROP TABLE IF EXISTS " + LINE_UP);
+        database.execSQL("DROP TABLE IF EXISTS " + FAVORITES);
         onCreate(database);
     }
 
-    public void addSong(String title, String songAuthor, String songLyricsAndChords, byte[] songImageCover, int orientation) {
-        SQLiteDatabase database = this.getWritableDatabase();
+    public void addSongToSongList(String tableName, String title, String songAuthor, String songLyricsAndChords, byte[] songImageCover, int orientation) {
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(COLUMN_TITLE, title);
-        contentValues.put(COLUMN_AUTHOR, songAuthor);
-        contentValues.put(COLUMN_LYRICS_AND_CHORDS, songLyricsAndChords);
-        contentValues.put(COLUMN_IMAGE_COVER, songImageCover);
-        contentValues.put(COLUMN_IMAGE_ORIENTATION, orientation);
-        long result = database.insert(TABLE_NAME, null, contentValues);
-        if(result == -1) { Toast.makeText(context, "Failed to add song", Toast.LENGTH_LONG).show(); return; }
-        Toast.makeText(context, "Success", Toast.LENGTH_LONG).show();
+        contentValues.put("song_title", title);
+        contentValues.put("song_author", songAuthor);
+        contentValues.put("song_content", songLyricsAndChords);
+        contentValues.put("song_image_cover", songImageCover);
+        contentValues.put("song_image_orientation", orientation);
+        long result = sqLiteDatabase.insert(tableName, null, contentValues);
+        if(result == -1) { Toast.makeText(CONTEXT, "Failed to add song", Toast.LENGTH_LONG).show(); return; }
+        Toast.makeText(CONTEXT, "Successfully added!", Toast.LENGTH_LONG).show();
     }
 
-    public Cursor getCursor() {
-        String query = "SELECT * FROM " + TABLE_NAME;
+    public void addSongToPersonalList(String tableName, String title, String type) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("song_title", title);
+        contentValues.put("song_type", type);
+        long result = sqLiteDatabase.insert(tableName, null, contentValues);
+        if(result == -1) { Toast.makeText(CONTEXT, "Failed to add song to the current " + tableName, Toast.LENGTH_LONG).show(); return; }
+        Toast.makeText(CONTEXT, "Song has been added to the current " + tableName, Toast.LENGTH_LONG).show();
+    }
+
+    public Cursor getCursor(String tableName) {
+        String query = "SELECT * FROM " + tableName;
         SQLiteDatabase database = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -74,4 +80,28 @@ public class SQLiteManager extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public void createDatabaseTables(SQLiteDatabase database) {
+        HashSet<String> queries = new HashSet<>();
+
+        queries.add("CREATE TABLE " + LYRICS_AND_CHORDS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, song_title TEXT, " +
+                "song_author TEXT, song_content TEXT, song_image_cover BLOB, song_image_orientation INTEGER);");
+        queries.add("CREATE TABLE " + LYRICS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, song_title TEXT, " +
+                "song_author TEXT, song_content TEXT, song_image_cover BLOB, song_image_orientation INTEGER);");
+        queries.add("CREATE TABLE " + CHORDS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, song_title TEXT, " +
+                "song_author TEXT, song_content TEXT, song_image_cover BLOB, song_image_orientation INTEGER);");
+        queries.add("CREATE TABLE " + LINE_UP + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, song_title TEXT, song_type TEXT);");
+        queries.add("CREATE TABLE " + FAVORITES + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, song_title TEXT, song_type TEXT);");
+
+        for (String query : queries) {
+            database.execSQL(query);
+        }
+    }
+
+    public void deleteItem(String tableName, String row_id) {
+        long result = sqLiteDatabase.delete(tableName, "_id=?", new String[]{(row_id)});
+        if(result == -1) { Toast.makeText(CONTEXT, "Failed to execute deletion.", Toast.LENGTH_LONG).show(); return; }
+        Toast.makeText(CONTEXT, "Successfully deleted.", Toast.LENGTH_LONG).show();
+    }
+
 }

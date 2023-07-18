@@ -72,7 +72,7 @@ public class AddSongActivity extends AppCompatActivity {
             }
 
             try (SQLiteManager sqLiteManager = new SQLiteManager(AddSongActivity.this)) {
-                sqLiteManager.addSong(songName.getText().toString(), songAuthor.getText().toString(), songLyricsAndChords.getText().toString(), imageBytes, orientation);
+                sqLiteManager.addSongToSongList("lyrics_and_chords", songName.getText().toString(), songAuthor.getText().toString(), songLyricsAndChords.getText().toString(), imageBytes, orientation);
             }
             songName.getText().clear();
             songAuthor.getText().clear();

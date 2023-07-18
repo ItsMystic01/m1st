@@ -1,11 +1,13 @@
-package Mystical.Mist.SongManager;
+package Mystical.Mist.SongManager.Favorites;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,19 +18,23 @@ import java.util.ArrayList;
 
 import Mystical.Mist.Functionalities.IntentsFunctionality;
 import Mystical.Mist.R;
+import Mystical.Mist.SQLiteManager.SQLiteManager;
+import Mystical.Mist.SongManager.Song;
 
-public class TypeListViewSongListAdapter extends RecyclerView.Adapter<TypeListViewSongListAdapter.ViewHolder>{
+public class FavoritesTypeListAdapter extends RecyclerView.Adapter<FavoritesTypeListAdapter.ViewHolder>{
 
     private ArrayList<Song> songArrayList = new ArrayList<>();
-    private Context context;
+    private final Context CONTEXT;
 
-    public TypeListViewSongListAdapter(Context context) {
-        this.context = context;
+    Animation translateAnimation;
+
+    public FavoritesTypeListAdapter(Context context) {
+        CONTEXT = context;
     }
 
     @NonNull
     @Override
-    public TypeListViewSongListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.type_list_view, parent, false);
         return new ViewHolder(view);
     }
@@ -40,7 +46,7 @@ public class TypeListViewSongListAdapter extends RecyclerView.Adapter<TypeListVi
         holder.listViewSongName.setText(songArrayList.get(position).getSongName());
         holder.listViewSongAuthor.setText(songArrayList.get(position).getSongAuthor());
         holder.listViewParent.setOnClickListener(view -> {
-            intentsFunctionality.viewSongIntent(context, songArrayList, position);
+            intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position);
         });
     }
 
@@ -59,6 +65,9 @@ public class TypeListViewSongListAdapter extends RecyclerView.Adapter<TypeListVi
             listViewSongName = itemView.findViewById(R.id.listViewSongName);
             listViewSongAuthor = itemView.findViewById(R.id.listViewSongAuthor);
             listViewParent = itemView.findViewById(R.id.listViewParent);
+
+            translateAnimation = AnimationUtils.loadAnimation(CONTEXT, R.anim.translate_animation);
+            listViewParent.setAnimation(translateAnimation);
         }
     }
 }

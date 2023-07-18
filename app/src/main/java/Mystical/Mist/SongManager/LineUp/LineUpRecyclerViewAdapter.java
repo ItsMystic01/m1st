@@ -1,13 +1,14 @@
-package Mystical.Mist.SongManager;
+package Mystical.Mist.SongManager.LineUp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,19 +20,22 @@ import java.util.ArrayList;
 
 import Mystical.Mist.Functionalities.IntentsFunctionality;
 import Mystical.Mist.R;
+import Mystical.Mist.SongManager.Song;
 
-public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerViewAdapter.ViewHolder> {
+public class LineUpRecyclerViewAdapter extends RecyclerView.Adapter<LineUpRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Song> songArrayList = new ArrayList<>();
-    private Context context;
+    private final Context CONTEXT;
 
-    public SongRecyclerViewAdapter(Context context) {
-        this.context = context;
+    Animation translateAnimation;
+
+    public LineUpRecyclerViewAdapter(Context context) {
+        this.CONTEXT = context;
     }
 
     @NonNull
     @Override
-    public SongRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.songs_list_item, parent, false);
         return new ViewHolder(view);
     }
@@ -49,7 +53,7 @@ public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerVi
         holder.songTxtName.setText(songArrayList.get(position).getSongName());
         holder.songAuthorName.setText(songArrayList.get(position).getSongAuthor());
         holder.parent.setOnClickListener(view -> {
-            intentsFunctionality.viewSongIntent(context, songArrayList, position);
+            intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position);
         });
     }
 
@@ -70,6 +74,9 @@ public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerVi
             songTxtName = itemView.findViewById(R.id.songTxtName);
             songAuthorName = itemView.findViewById(R.id.songAuthorName);
             parent = itemView.findViewById(R.id.parent);
+
+            translateAnimation = AnimationUtils.loadAnimation(CONTEXT, R.anim.translate_animation);
+            parent.setAnimation(translateAnimation);
         }
     }
 }

@@ -1,75 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".Activities.MainActivity"
+    android:id="@+id/drawer_layout"
     android:background="#302326">
 
-    <ImageView
-        android:id="@+id/background_image"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@mipmap/background_addition" />
+        android:background="@color/maroon">
 
-    <TextView
-        android:id="@+id/we_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50sp"
-        android:layout_marginBottom="2sp"
-        android:fontFamily="@font/combo"
-        android:text="@string/we_play"
-        android:textColor="#FFFFFF"
-        android:textSize="50sp" />
+        <ImageView
+            android:id="@+id/background_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/background_addition"
+            android:contentDescription="@string/todo" />
 
-    <TextView
-        android:id="@+id/worship_team_helper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/barlow_condensed_bold"
-        android:text="@string/worship_team_helper"
-        android:textAlignment="center"
-        android:textSize="80sp"
-        android:textStyle="bold"
-        android:layout_below="@id/we_play"
-        android:textColor="#DB7558"/>
-
-    <TextView
-        android:id="@+id/click_to_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/heebo_bold"
-        android:text="@string/click_to_start"
-        android:textColor="@color/white"
-        android:layout_below="@id/worship_team_helper"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50sp"/>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!-- Main content -->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addSongButtonInMain"
+        <TextView
+            android:id="@+id/we_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            app:fabSize="mini"
-            app:fabCustomSize="@android:dimen/app_icon_size"
-            android:backgroundTint="#DB7558"
-            android:contentDescription="@string/add_song"
-            app:srcCompat="@drawable/addition_sign"
-            app:tint="#372025"
-            app:rippleColor="#B4A592"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50sp"
+            android:layout_marginBottom="2sp"
+            android:fontFamily="@font/combo"
+            android:text="@string/we_play"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <TextView
+            android:id="@+id/worship_team_helper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/barlow_condensed_bold"
+            android:text="@string/worship_team_helper"
+            android:textAlignment="center"
+            android:textSize="80sp"
+            android:textStyle="bold"
+            android:layout_below="@id/we_play"
+            android:textColor="@color/peach"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/click_to_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/heebo_bold"
+            android:text="@string/click_to_start"
+            android:textColor="@color/white"
+            android:layout_below="@id/worship_team_helper"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50sp"/>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Main content -->
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addSongButtonInMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="32dp"
+                app:fabSize="mini"
+                app:fabCustomSize="@android:dimen/app_icon_size"
+                android:backgroundTint="#DB7558"
+                android:contentDescription="@string/add_song"
+                app:srcCompat="@drawable/settings"
+                app:tint="#372025"
+                app:rippleColor="#B4A592"/>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_menu"
+        android:id="@+id/navigational_view"
+        android:backgroundTint="#302326"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/peach"
+        app:subheaderColor="@color/white"
+        android:layout_gravity="start"
+        />
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
+

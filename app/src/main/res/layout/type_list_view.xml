@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="10dp"
+    app:cardCornerRadius="25dp"
+    app:cardElevation="100dp"
+    app:cardBackgroundColor="@color/peach"
     android:layout_margin="5dp">
     
     <RelativeLayout
@@ -16,19 +17,23 @@
 
         <TextView
             android:id="@+id/listViewSongName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/anonymous_pro_bold"
             android:text="@string/song_name"
-            android:textStyle="bold"
-            android:textSize="25sp"/>
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/listViewSongAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/listViewSongName"
+            android:fontFamily="@font/anonymous_pro_bold"
             android:text="@string/author_name"
-            android:textStyle="bold" />
+            android:textColor="@color/white"
+            android:textStyle="bold|italic" />
 
     </RelativeLayout>
 

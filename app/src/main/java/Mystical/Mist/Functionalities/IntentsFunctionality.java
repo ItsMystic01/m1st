@@ -17,8 +17,7 @@ public class IntentsFunctionality {
         Intent intent = new Intent(context, ViewSong.class);
         intent.putExtra("songName", songArrayList.get(position).getSongName());
         intent.putExtra("songAuthor", songArrayList.get(position).getSongAuthor());
-        intent.putExtra("songLyricsAndChords", songArrayList.get(position).getSongLyricsAndChords());
-        intent.putExtra("songLyricsAndChords", songArrayList.get(position).getSongLyricsAndChords());
+        intent.putExtra("songContent", songArrayList.get(position).getSongContent());
         context.startActivity(intent);
     }
 
