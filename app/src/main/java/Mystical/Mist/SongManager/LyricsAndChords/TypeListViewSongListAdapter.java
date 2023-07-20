@@ -26,12 +26,13 @@ public class TypeListViewSongListAdapter extends RecyclerView.Adapter<TypeListVi
     private ArrayList<Song> songArrayList = new ArrayList<>();
     private final Context CONTEXT;
     private final SQLiteManager SQLITE_MANAGER;
-
+    private final String SONG_TYPE;
     Animation translateAnimation;
 
-    public TypeListViewSongListAdapter(Context context, SQLiteManager sqLiteManager) {
+    public TypeListViewSongListAdapter(Context context, SQLiteManager sqLiteManager, String songType) {
         CONTEXT = context;
         SQLITE_MANAGER = sqLiteManager;
+        SONG_TYPE = songType;
     }
 
     @NonNull
@@ -60,9 +61,9 @@ public class TypeListViewSongListAdapter extends RecyclerView.Adapter<TypeListVi
                 TextView songName = view.findViewById(R.id.listViewSongName);
 
                 if(item.getItemId() == R.id.line_up) {
-                    SQLITE_MANAGER.addSongToPersonalList("line_up", songName.getText().toString(), "none");
+                    SQLITE_MANAGER.addSongToPersonalList("line_up", songName.getText().toString(), SONG_TYPE);
                 } else if (item.getItemId() == R.id.favorite) {
-                    SQLITE_MANAGER.addSongToPersonalList("favorites", songName.getText().toString(), "none");
+                    SQLITE_MANAGER.addSongToPersonalList("favorites", songName.getText().toString(), SONG_TYPE);
                 }
                 return true;
             });

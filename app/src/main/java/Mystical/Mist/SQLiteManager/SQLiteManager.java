@@ -5,13 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class SQLiteManager extends SQLiteOpenHelper {
@@ -25,7 +22,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
     private final String FAVORITES = "favorites";
 
     private final Context CONTEXT;
-    private SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+    private final SQLiteDatabase SQLITE_DATABASE = this.getWritableDatabase();
 
     public SQLiteManager(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -55,7 +52,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         contentValues.put("song_content", songLyricsAndChords);
         contentValues.put("song_image_cover", songImageCover);
         contentValues.put("song_image_orientation", orientation);
-        long result = sqLiteDatabase.insert(tableName, null, contentValues);
+        long result = SQLITE_DATABASE.insert(tableName, null, contentValues);
         if(result == -1) { Toast.makeText(CONTEXT, "Failed to add song", Toast.LENGTH_LONG).show(); return; }
         Toast.makeText(CONTEXT, "Successfully added!", Toast.LENGTH_LONG).show();
     }
@@ -65,7 +62,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
 
         contentValues.put("song_title", title);
         contentValues.put("song_type", type);
-        long result = sqLiteDatabase.insert(tableName, null, contentValues);
+        long result = SQLITE_DATABASE.insert(tableName, null, contentValues);
         if(result == -1) { Toast.makeText(CONTEXT, "Failed to add song to the current " + tableName, Toast.LENGTH_LONG).show(); return; }
         Toast.makeText(CONTEXT, "Song has been added to the current " + tableName, Toast.LENGTH_LONG).show();
     }
@@ -98,8 +95,8 @@ public class SQLiteManager extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteItem(String tableName, String row_id) {
-        long result = sqLiteDatabase.delete(tableName, "_id=?", new String[]{(row_id)});
+    public void deleteItem(String tableName, String song_title, String song_type) {
+        long result = SQLITE_DATABASE.delete(tableName, "song_title=? AND song_type=?", new String[]{song_title, song_type});
         if(result == -1) { Toast.makeText(CONTEXT, "Failed to execute deletion.", Toast.LENGTH_LONG).show(); return; }
         Toast.makeText(CONTEXT, "Successfully deleted.", Toast.LENGTH_LONG).show();
     }

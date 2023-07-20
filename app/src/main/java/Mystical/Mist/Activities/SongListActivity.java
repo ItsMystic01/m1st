@@ -29,26 +29,28 @@ public class SongListActivity extends AppCompatActivity {
     private TypeListViewSongListAdapter typeListViewSongListAdapter;
     private SongRecyclerViewAdapter songRecyclerViewAdapter;
     private boolean status = true;
+    private String TABLE_NAME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.song_list);
 
-        songsRecView = findViewById(R.id.songsRecView);
-
         sqLiteManager = new SQLiteManager(SongListActivity.this);
+
+        TABLE_NAME = getIntent().getStringExtra("type");
+        songsRecView = findViewById(R.id.songsRecView);
 
         storeDataToArrayList();
 
-        typeListViewSongListAdapter = new TypeListViewSongListAdapter(this, sqLiteManager);
+        typeListViewSongListAdapter = new TypeListViewSongListAdapter(this, sqLiteManager, TABLE_NAME);
         typeListViewSongListAdapter.setSongs(songArrayList);
 
         songsRecView.setAdapter(typeListViewSongListAdapter);
         songsRecView.setLayoutManager(new LinearLayoutManager(this));
         status = true;
 
-        songRecyclerViewAdapter = new SongRecyclerViewAdapter(this);
+        songRecyclerViewAdapter = new SongRecyclerViewAdapter(this, sqLiteManager, TABLE_NAME);
         songRecyclerViewAdapter.setSongs(songArrayList);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
@@ -66,7 +68,7 @@ public class SongListActivity extends AppCompatActivity {
     }
 
     public void storeDataToArrayList() {
-        Cursor cursor = sqLiteManager.getCursor("lyrics_and_chords");
+        Cursor cursor = sqLiteManager.getCursor(TABLE_NAME);
 
         ImageView noDataImageView = findViewById(R.id.empty_icon);
         TextView noDataTextView = findViewById(R.id.no_data_text);
@@ -82,7 +84,7 @@ public class SongListActivity extends AppCompatActivity {
             noDataImageView.setVisibility(View.GONE);
             noDataTextView.setVisibility(View.GONE);
             songArrayList.add(new Song(cursor.getString(1), cursor.getString(2),
-                    cursor.getString(3), cursor.getBlob(4), cursor.getInt(5)));
+                    cursor.getString(3), cursor.getBlob(4), cursor.getInt(5), TABLE_NAME));
         }
     }
 

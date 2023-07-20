@@ -1,7 +1,5 @@
 package Mystical.Mist.SongManager;
 
-import java.util.Arrays;
-
 public class Song {
 
     private String songName;
@@ -9,13 +7,15 @@ public class Song {
     private String songContent;
     private byte[] songImageCover;
     private int songImageOrientation;
+    private String songType;
 
-    public Song(String songName, String songAuthor, String songContent, byte[] songImageCover, int songImageOrientation) {
+    public Song(String songName, String songAuthor, String songContent, byte[] songImageCover, int songImageOrientation, String songType) {
         this.songName = songName;
         this.songAuthor = songAuthor;
         this.songContent = songContent;
         this.songImageCover = songImageCover;
         this.songImageOrientation = songImageOrientation;
+        this.songType = songType;
     }
 
     public String getSongName() {
@@ -34,9 +34,9 @@ public class Song {
         this.songAuthor = songAuthor;
     }
 
-    public String getSongContent() { return songContent; }
-
     public void setSongContent(String songContent) { this.songContent = songContent; }
+
+    public String getSongContent() { return songContent; }
 
     public byte[] getSongImageCover() {
         return songImageCover;
@@ -50,7 +50,7 @@ public class Song {
         return songImageOrientation;
     }
 
-    public void setSongImageOrientation(int songImageOrientation) {
-        this.songImageOrientation = songImageOrientation;
-    }
+    public void setSongImageOrientation(int songImageOrientation) { this.songImageOrientation = songImageOrientation; }
+    public String getSongType() { return songType; }
+    public void setSongType(String songType) { this.songType = songType; }
 }

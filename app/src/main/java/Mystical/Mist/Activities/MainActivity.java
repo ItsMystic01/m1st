@@ -37,13 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
 
         findViewById(R.id.background_image).setOnClickListener(view -> {
-            try (SQLiteManager sqLiteManager = new SQLiteManager(this)) {
-                if (sqLiteManager.getCursor("lyrics_and_chords").getCount() == 0) {
-                    Toast.makeText(this, "No data found", Toast.LENGTH_LONG).show();
-                    return;
-                }
-            }
             Intent intent = new Intent(MainActivity.this, SongListActivity.class);
+            intent.putExtra("type", "lyrics_and_chords");
             startActivity(intent);
         });
 
@@ -66,13 +61,16 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.nav_option_lyrics) {
-                    Toast.makeText(MainActivity.this, "Lyrics Only - Coming Soon", Toast.LENGTH_SHORT).show();
-                    return true;
+                    Intent intent = new Intent(MainActivity.this, SongListActivity.class);
+                    intent.putExtra("type", "lyrics");
+                    startActivity(intent);
                 } else if (itemId == R.id.nav_option_chords) {
-                    Toast.makeText(MainActivity.this, "Lyrics Only - Coming Soon", Toast.LENGTH_SHORT).show();
-                    return true;
+                    Intent intent = new Intent(MainActivity.this, SongListActivity.class);
+                    intent.putExtra("type", "chords");
+                    startActivity(intent);
                 } else if (itemId == R.id.nav_option_lyrics_and_chords) {
                     Intent intent = new Intent(MainActivity.this, SongListActivity.class);
+                    intent.putExtra("type", "lyrics_and_chords");
                     startActivity(intent);
                     return true;
                 } else if (itemId == R.id.nav_option_add_song) {

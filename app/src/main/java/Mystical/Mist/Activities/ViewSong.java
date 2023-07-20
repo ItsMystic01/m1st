@@ -1,19 +1,12 @@
 package Mystical.Mist.Activities;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import Mystical.Mist.R;
-import Mystical.Mist.SQLiteManager.SQLiteManager;
 
 public class ViewSong extends AppCompatActivity {
 

@@ -12,7 +12,6 @@
     <string name="title_activity_add_song_one">AddSongActivityOne</string>
     <string name="new_song">New Song</string>
     <string name="song_author">Song Author</string>
-    <string name="lyrics_and_chords">Lyrics and Chords</string>
     <string name="song_title">song_title</string>
     <string name="pick_an_image">Pick an Image</string>
     <string name="image_picked">Image Picked</string>
@@ -20,10 +19,14 @@
     <string name="close">Close Navigation Drawer</string>
     <string name="lyrics_only">Lyrics Only</string>
     <string name="chords_only">Chords Only</string>
+    <string name="lyrics">Lyrics</string>
+    <string name="chords">Chords</string>
+    <string name="lyrics_and_chords">Lyrics &amp; Chords</string>
     <string name="line_up">Line Up</string>
     <string name="favorites">Favorites</string>
     <string name="add_to_favorites">Add to Favorites</string>
     <string name="add_to_line_up">Add to Line Up</string>
     <string name="empty">empty</string>
     <string name="no_data">No Data</string>
+    <string name="remove_song">Remove Song</string>
 </resources>

@@ -5,4 +5,7 @@
     <color name="peach">#DB7558</color>
     <color name="maroon">#302326</color>
     <color name="gray">#A8A196</color>
+    <color name="red">#FF0000</color>
+    <color name="battleship_gray">#848482</color>
+    <color name="cream">#ffe4c4</color>
 </resources>

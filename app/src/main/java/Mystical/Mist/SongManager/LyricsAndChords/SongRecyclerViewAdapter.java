@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,17 +21,21 @@ import java.util.ArrayList;
 
 import Mystical.Mist.Functionalities.IntentsFunctionality;
 import Mystical.Mist.R;
+import Mystical.Mist.SQLiteManager.SQLiteManager;
 import Mystical.Mist.SongManager.Song;
 
 public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Song> songArrayList = new ArrayList<>();
     private final Context CONTEXT;
-
+    private final SQLiteManager SQLITE_MANAGER;
+    private final String SONG_TYPE;
     Animation translateAnimation;
 
-    public SongRecyclerViewAdapter(Context context) {
-        this.CONTEXT = context;
+    public SongRecyclerViewAdapter(Context context, SQLiteManager sqLiteManager, String songType) {
+        CONTEXT = context;
+        SQLITE_MANAGER = sqLiteManager;
+        SONG_TYPE = songType;
     }
 
     @NonNull
@@ -54,6 +59,26 @@ public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerVi
         holder.songAuthorName.setText(songArrayList.get(position).getSongAuthor());
         holder.parent.setOnClickListener(view -> {
             intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position);
+        });
+
+        holder.parent.setOnLongClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(CONTEXT.getApplicationContext(), view);
+
+            popupMenu.getMenuInflater().inflate(R.menu.long_press_song_menu, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(item -> {
+                TextView songName = view.findViewById(R.id.listViewSongName);
+
+                if(item.getItemId() == R.id.line_up) {
+                    SQLITE_MANAGER.addSongToPersonalList("line_up", songName.getText().toString(), SONG_TYPE);
+                } else if (item.getItemId() == R.id.favorite) {
+                    SQLITE_MANAGER.addSongToPersonalList("favorites", songName.getText().toString(), SONG_TYPE);
+                }
+                return true;
+            });
+
+            popupMenu.show();
+
+            return true;
         });
     }
 

@@ -3,9 +3,10 @@ package Mystical.Mist.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,41 +18,66 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
+import Mystical.Mist.Functionalities.Field;
 import Mystical.Mist.Functionalities.IntentsFunctionality;
 import Mystical.Mist.R;
 import Mystical.Mist.SQLiteManager.SQLiteManager;
 
 public class AddSongActivity extends AppCompatActivity {
 
-    Button pickImageButton, addSongButton;
+    Button pickImageButton, addSongButton, lyricsButton, lyricsAndChordsButton, chordsButton;
+    MaterialButtonToggleGroup toggleButton;
+    TextInputLayout songNameTextInputLayout, songAuthorTextInputLayout, songContentsTextInputLayout;
     private EditText songName, songAuthor, songLyricsAndChords;
     private TextView pickImageTextName;
     private final int REQUEST_CODE = 1000;
     private byte[] imageBytes;
     private int orientation;
+    private String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_song);
-
-        songName = findViewById(R.id.songName);
-        songAuthor = findViewById(R.id.songAuthor);
-        songLyricsAndChords = findViewById(R.id.lyricsAndChords);
+        songName = findViewById(R.id.txtSongName);
+        songAuthor = findViewById(R.id.txtSongAuthor);
+        songLyricsAndChords = findViewById(R.id.txtLyricsAndChords);
         pickImageButton = findViewById(R.id.addImageButton);
         pickImageTextName = findViewById(R.id.image_picked);
         addSongButton = findViewById(R.id.addSongButton);
+        lyricsButton = findViewById(R.id.lyricsButton);
+        lyricsAndChordsButton = findViewById(R.id.lyricsAndChordsButton);
+        chordsButton = findViewById(R.id.chordsButton);
+        toggleButton = findViewById(R.id.toggleButton);
+        songNameTextInputLayout = findViewById(R.id.songNameTextField);
+        songAuthorTextInputLayout = findViewById(R.id.songAuthorTextField);
+        songContentsTextInputLayout = findViewById(R.id.songContentsTextInputLayout);
+
+        songName.setOnFocusChangeListener((view, hasFocus) -> setTextFieldsAlgorithm(view, hasFocus, songName, songNameTextInputLayout));
+        songAuthor.setOnFocusChangeListener((view, hasFocus) -> setTextFieldsAlgorithm(view, hasFocus, songAuthor, songAuthorTextInputLayout));
+        songLyricsAndChords.setOnFocusChangeListener((view, hasFocus) -> setTextFieldsAlgorithm(view, hasFocus, songLyricsAndChords, songContentsTextInputLayout));
+
+        toggleButton.addOnButtonCheckedListener(((group, checkedId, isChecked) -> {
+            if (checkedId == (lyricsButton.getId())) {
+                updateType("lyrics", "Lyrics");
+            } else if (checkedId == lyricsAndChordsButton.getId()) {
+                updateType("lyrics_and_chords", "Lyrics & Chords");
+            } else if (checkedId == chordsButton.getId()) {
+                updateType("chords", "Chords");
+            }
+        }));
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -65,18 +91,16 @@ public class AddSongActivity extends AppCompatActivity {
 
         addSongButton.setOnClickListener(view -> {
 
-            if(songName.getText().toString().trim().isEmpty() || songAuthor.getText().toString().trim().isEmpty() ||
-                    songLyricsAndChords.getText().toString().trim().isEmpty() || imageBytes.length == 0) {
+            if (Field.checkInputs(songName, songAuthor, songLyricsAndChords) || imageBytes.length == 0) {
                 Toast.makeText(this, "Fill all empty fields", Toast.LENGTH_LONG).show();
                 return;
             }
 
             try (SQLiteManager sqLiteManager = new SQLiteManager(AddSongActivity.this)) {
-                sqLiteManager.addSongToSongList("lyrics_and_chords", songName.getText().toString(), songAuthor.getText().toString(), songLyricsAndChords.getText().toString(), imageBytes, orientation);
+                sqLiteManager.addSongToSongList(type, Field.getText(songName), Field.getText(songAuthor), Field.getText(songLyricsAndChords), imageBytes, orientation);
             }
-            songName.getText().clear();
-            songAuthor.getText().clear();
-            songLyricsAndChords.getText().clear();
+
+            Field.clearTexts(songName, songAuthor, songLyricsAndChords);
             pickImageTextName.setText("");
         });
     }
@@ -85,7 +109,7 @@ public class AddSongActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == RESULT_OK && requestCode == REQUEST_CODE && data != null) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE && data != null) {
             String imageName = getFileNameFromUri(data.getData());
             pickImageTextName.setText(imageName);
             try {
@@ -141,6 +165,38 @@ public class AddSongActivity extends AppCompatActivity {
             return imagePath;
         }
         return null;
+    }
+
+    public void setTextFieldsAlgorithm(View view, boolean hasFocus, EditText textField, TextInputLayout layout) {
+        if (!hasFocus && Field.checkInputs(textField)) {
+            setStyleOnNoFocusAndEmpty(view, layout);
+            return;
+        } else if (!hasFocus) {
+            setStyleOnNoFocus(view, layout);
+            return;
+        }
+        setStyleOnFocus(view, layout);
+    }
+
+    public void setStyleOnNoFocusAndEmpty(View view, TextInputLayout layout) {
+        layout.setBoxBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.cream));
+        layout.setError("Fill out this field!");
+        layout.setStartIconTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.battleship_gray)));
+    }
+
+    public void setStyleOnNoFocus(View view, TextInputLayout layout) {
+        layout.setStartIconTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.battleship_gray)));
+    }
+
+    public void setStyleOnFocus(View view, TextInputLayout layout) {
+        layout.setBoxBackgroundColor(Color.TRANSPARENT);
+        layout.setStartIconTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.white)));
+        layout.setError(null);
+    }
+
+    public void updateType(String type, String layoutType) {
+        this.type = type;
+        songContentsTextInputLayout.setHint(layoutType);
     }
 
 }

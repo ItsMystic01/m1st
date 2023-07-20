@@ -32,8 +32,7 @@
                     android:id="@+id/nav_option_add_song"
                     android:enabled="true"
                     android:icon="@drawable/addition_sign"
-                    android:title="@string/add_song"
-                    />
+                    android:title="@string/add_song"/>
                 <item
                     android:id="@+id/nav_option_modify_song"
                     android:enabled="true"
