@@ -16,7 +16,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import Mystical.Mist.R;
 
-public class MainActivity extends AppCompatActivity {
+public class ModifyListActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
 
         findViewById(R.id.background_image).setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, SongListActivity.class);
+            Intent intent = new Intent(ModifyListActivity.this, SongListActivity.class);
             intent.putExtra("type", "lyrics_and_chords");
             startActivity(intent);
         });
@@ -55,31 +55,31 @@ public class MainActivity extends AppCompatActivity {
             int itemId = item.getItemId();
 
             if (itemId == R.id.nav_option_lyrics) {
-                Intent intent = new Intent(MainActivity.this, SongListActivity.class);
+                Intent intent = new Intent(ModifyListActivity.this, SongListActivity.class);
                 intent.putExtra("type", "lyrics");
                 startActivity(intent);
             } else if (itemId == R.id.nav_option_chords) {
-                Intent intent = new Intent(MainActivity.this, SongListActivity.class);
+                Intent intent = new Intent(ModifyListActivity.this, SongListActivity.class);
                 intent.putExtra("type", "chords");
                 startActivity(intent);
             } else if (itemId == R.id.nav_option_lyrics_and_chords) {
-                Intent intent = new Intent(MainActivity.this, SongListActivity.class);
+                Intent intent = new Intent(ModifyListActivity.this, SongListActivity.class);
                 intent.putExtra("type", "lyrics_and_chords");
                 startActivity(intent);
                 return true;
             } else if (itemId == R.id.nav_option_add_song) {
-                Intent intent = new Intent(MainActivity.this, AddSongActivity.class);
+                Intent intent = new Intent(ModifyListActivity.this, AddSongActivity.class);
                 startActivity(intent);
                 return true;
             } else if (itemId == R.id.nav_option_modify_song) {
-                Toast.makeText(MainActivity.this, "Modify Song - Coming Soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ModifyListActivity.this, "Modify Song - Coming Soon", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (itemId == R.id.nav_option_line_up) {
-                Intent intent = new Intent(MainActivity.this, LineUpListActivity.class);
+                Intent intent = new Intent(ModifyListActivity.this, LineUpListActivity.class);
                 startActivity(intent);
                 return true;
             } else if (itemId == R.id.nav_option_favorites) {
-                Intent intent = new Intent(MainActivity.this, FavoritesListActivity.class);
+                Intent intent = new Intent(ModifyListActivity.this, FavoritesListActivity.class);
                 startActivity(intent);
                 return true;
             }

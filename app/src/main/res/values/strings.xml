@@ -29,4 +29,5 @@
     <string name="empty">empty</string>
     <string name="no_data">No Data</string>
     <string name="remove_song">Remove Song</string>
+    <string name="update_song">Update Song</string>
 </resources>

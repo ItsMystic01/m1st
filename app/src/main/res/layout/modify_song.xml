@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#302326"
+    android:padding="10dp"
+    android:textAlignment="gravity"
+    tools:context=".Activities.ModifySongActivity">
+
+    <ImageView
+        android:id="@+id/additional_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@mipmap/background_addition"
+        android:contentDescription="@string/todo" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/worship_team_helper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/barlow_condensed_bold"
+                android:text="@string/new_song"
+                android:textAlignment="center"
+                android:textColor="#DB7558"
+                android:textSize="80sp"
+                android:layout_marginTop="25dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/songNameTextField"
+                style="@style/TextInputLayout"
+                android:layout_below="@id/worship_team_helper"
+                android:hint="@string/song_name"
+                app:startIconDrawable="@drawable/chords"
+                android:layout_marginTop="10dp"
+                app:startIconTint="@color/battleship_gray"
+                app:endIconMode="clear_text"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtSongName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/battleship_gray"
+                    android:textColor="@color/battleship_gray"
+                    android:padding="5dp"
+                    android:lines="1"
+                    android:inputType="text|textNoSuggestions"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/songAuthorTextField"
+                style="@style/TextInputLayout"
+                android:layout_below="@id/songNameTextField"
+                android:hint="@string/song_author"
+                app:startIconDrawable="@drawable/chords"
+                app:startIconTint="@color/battleship_gray"
+                app:endIconMode="clear_text"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtSongAuthor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/battleship_gray"
+                    android:textColor="@color/battleship_gray"
+                    android:padding="5dp"
+                    android:lines="1"
+                    android:inputType="text|textNoSuggestions"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/songContentsTextInputLayout"
+                style="@style/TextInputLayout"
+                android:layout_below="@id/songAuthorTextField"
+                android:hint="@string/lyrics_and_chords"
+                app:startIconTint="@color/battleship_gray"
+                app:startIconDrawable="@drawable/chords"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtLyricsAndChords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/battleship_gray"
+                    android:textColor="@color/battleship_gray"
+                    android:lines="5"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/image_picked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/songContentsTextInputLayout"
+                android:fontFamily="@font/barlow_condensed_bold"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="#DB7558"
+                android:textSize="20sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginEnd="100sp"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/addImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_picked"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="#DB7558"
+                android:text="@string/pick_an_image"
+                android:layout_marginBottom="10dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"
+                android:textColor="@color/white"/>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/updateSong"
+                style="@style/Widget.Material3.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/addImageButton"
+                android:backgroundTint="#DB7558"
+                android:text="@string/update_song"
+                android:textColor="@color/white"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="25dp"
+                app:icon="@drawable/pen"
+                app:iconTint="@color/white"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

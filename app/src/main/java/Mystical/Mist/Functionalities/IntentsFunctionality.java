@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+//noinspection ExifInterface
 import android.media.ExifInterface;
 
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ public class IntentsFunctionality {
                 matrix.postRotate(270);
                 break;
             default:
-                // No rotation needed
                 return bitmap;
         }
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);

@@ -24,6 +24,7 @@ import Mystical.Mist.Functionalities.IntentsFunctionality;
 import Mystical.Mist.R;
 import Mystical.Mist.SQLiteManager.SQLiteManager;
 import Mystical.Mist.SongManager.Song;
+import Mystical.Mist.SongManager.SongManager;
 
 public class LineUpTypeListAdapter extends RecyclerView.Adapter<LineUpTypeListAdapter.ViewHolder>{
 
@@ -50,16 +51,17 @@ public class LineUpTypeListAdapter extends RecyclerView.Adapter<LineUpTypeListAd
 
         holder.listViewSongName.setText(songArrayList.get(position).getSongName());
         holder.listViewSongAuthor.setText(songArrayList.get(position).getSongAuthor());
-        holder.listViewParent.setOnClickListener(view -> {
-            intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position);
-        });
+        holder.listViewParent.setOnClickListener(view -> intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position));
         holder.listViewParent.setOnLongClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(CONTEXT.getApplicationContext(), view);
 
             popupMenu.getMenuInflater().inflate(R.menu.long_press_song_to_delete, popupMenu.getMenu());
             popupMenu.setOnMenuItemClickListener(item -> {
                 if(item.getItemId() == R.id.remove_song) {
-                    deleteSong(songArrayList.get(position).getSongName(), songArrayList.get(position).getSongType(), position);
+                    SongManager.deleteSong(CONTEXT, SQLITE_MANAGER, "line_up", position, songArrayList);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, songArrayList.size());
+                    setSongs(songArrayList);
                 }
                 return true;
             });
@@ -88,26 +90,6 @@ public class LineUpTypeListAdapter extends RecyclerView.Adapter<LineUpTypeListAd
 
             translateAnimation = AnimationUtils.loadAnimation(CONTEXT, R.anim.translate_animation);
             listViewParent.setAnimation(translateAnimation);
-        }
-    }
-
-    public void deleteSong(String songName, String songType, int position) {
-        // Delete the song at the specified position from the database
-        SQLITE_MANAGER.deleteItem("line_up", songName, songType);
-
-        // Remove the song from the dataset
-        songArrayList.remove(position);
-
-        // Notify the adapter that the dataset has changed
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, songArrayList.size());
-        this.setSongs(songArrayList);
-
-        if (songArrayList.isEmpty()) {
-            // If it's empty, navigate back to MainActivity
-            Intent intent = new Intent(CONTEXT, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            CONTEXT.startActivity(intent);
         }
     }
 }

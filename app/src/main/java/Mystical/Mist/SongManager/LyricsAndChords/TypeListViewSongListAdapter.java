@@ -48,16 +48,13 @@ public class TypeListViewSongListAdapter extends RecyclerView.Adapter<TypeListVi
 
         holder.listViewSongName.setText(songArrayList.get(position).getSongName());
         holder.listViewSongAuthor.setText(songArrayList.get(position).getSongAuthor());
-        holder.listViewParent.setOnClickListener(view -> {
-            intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position);
-        });
+        holder.listViewParent.setOnClickListener(view -> intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position));
 
         holder.listViewParent.setOnLongClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(CONTEXT.getApplicationContext(), view);
 
             popupMenu.getMenuInflater().inflate(R.menu.long_press_song_menu, popupMenu.getMenu());
             popupMenu.setOnMenuItemClickListener(item -> {
-                // Handle menu item click events
                 TextView songName = view.findViewById(R.id.listViewSongName);
 
                 if(item.getItemId() == R.id.line_up) {

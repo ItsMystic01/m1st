@@ -57,9 +57,7 @@ public class SongRecyclerViewAdapter extends RecyclerView.Adapter<SongRecyclerVi
         }
         holder.songTxtName.setText(songArrayList.get(position).getSongName());
         holder.songAuthorName.setText(songArrayList.get(position).getSongAuthor());
-        holder.parent.setOnClickListener(view -> {
-            intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position);
-        });
+        holder.parent.setOnClickListener(view -> intentsFunctionality.viewSongIntent(CONTEXT, songArrayList, position));
 
         holder.parent.setOnLongClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(CONTEXT.getApplicationContext(), view);

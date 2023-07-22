@@ -7,7 +7,6 @@ import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-//noinspection ExifInterface
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,9 +35,9 @@ import Mystical.Mist.Functionalities.IntentsFunctionality;
 import Mystical.Mist.R;
 import Mystical.Mist.SQLiteManager.SQLiteManager;
 
-public class AddSongActivity extends AppCompatActivity {
+public class ModifySongActivity extends AppCompatActivity {
 
-    Button pickImageButton, addSongButton, lyricsButton, lyricsAndChordsButton, chordsButton;
+    Button pickImageButton, updateSongButton, lyricsButton, lyricsAndChordsButton, chordsButton;
     MaterialButtonToggleGroup toggleButton;
     TextInputLayout songNameTextInputLayout, songAuthorTextInputLayout, songContentsTextInputLayout;
     private EditText songName, songAuthor, songLyricsAndChords;
@@ -51,17 +50,14 @@ public class AddSongActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_song);
+        setContentView(R.layout.modify_song);
+
         songName = findViewById(R.id.txtSongName);
         songAuthor = findViewById(R.id.txtSongAuthor);
         songLyricsAndChords = findViewById(R.id.txtLyricsAndChords);
         pickImageButton = findViewById(R.id.addImageButton);
         pickImageTextName = findViewById(R.id.image_picked);
-        addSongButton = findViewById(R.id.addSongButton);
-        lyricsButton = findViewById(R.id.lyricsButton);
-        lyricsAndChordsButton = findViewById(R.id.lyricsAndChordsButton);
-        chordsButton = findViewById(R.id.chordsButton);
-        toggleButton = findViewById(R.id.toggleButton);
+        updateSongButton = findViewById(R.id.updateSong);
         songNameTextInputLayout = findViewById(R.id.songNameTextField);
         songAuthorTextInputLayout = findViewById(R.id.songAuthorTextField);
         songContentsTextInputLayout = findViewById(R.id.songContentsTextInputLayout);
@@ -90,14 +86,14 @@ public class AddSongActivity extends AppCompatActivity {
             startActivityIfNeeded(galleryIntent, REQUEST_CODE);
         });
 
-        addSongButton.setOnClickListener(view -> {
+        updateSongButton.setOnClickListener(view -> {
 
             if (Field.checkInputs(songName, songAuthor, songLyricsAndChords) || imageBytes.length == 0) {
                 Toast.makeText(this, "Fill all empty fields", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            try (SQLiteManager sqLiteManager = new SQLiteManager(AddSongActivity.this)) {
+            try (SQLiteManager sqLiteManager = new SQLiteManager(ModifySongActivity.this)) {
                 sqLiteManager.addSongToSongList(type, Field.getText(songName), Field.getText(songAuthor), Field.getText(songLyricsAndChords), imageBytes, orientation);
             }
 
