@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import Mystical.Mist.R;
+import Mystical.Mist.SQLiteManager.SQLiteManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,13 +36,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        try(SQLiteManager sqLiteManager = new SQLiteManager(this)) {
+            sqLiteManager.copyDatabaseFromAssets();
+        } catch (Exception e) {
+            return;
+        }
+
+
         findViewById(R.id.background_image).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SongListActivity.class);
             intent.putExtra("type", "lyrics_and_chords");
             startActivity(intent);
         });
 
-        FloatingActionButton button = findViewById(R.id.addSongButtonInMain);
+        FloatingActionButton button = findViewById(R.id.settingsButtonInMain);
         button.setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
         drawerLayout = findViewById(R.id.drawer_layout);

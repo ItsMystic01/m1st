@@ -5,10 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashSet;
 
 public class SQLiteManager extends SQLiteOpenHelper {
@@ -42,6 +48,29 @@ public class SQLiteManager extends SQLiteOpenHelper {
         database.execSQL("DROP TABLE IF EXISTS " + LINE_UP);
         database.execSQL("DROP TABLE IF EXISTS " + FAVORITES);
         onCreate(database);
+    }
+
+    public void copyDatabaseFromAssets() {
+        try {
+            assert CONTEXT != null;
+            InputStream inputStream = CONTEXT.getAssets().open(DATABASE_NAME);
+            String outputFileName = CONTEXT.getDatabasePath(DATABASE_NAME).getPath();
+            OutputStream outputStream = Files.newOutputStream(Paths.get(outputFileName));
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+
+            outputStream.flush();
+            outputStream.close();
+            inputStream.close();
+
+            Log.d("DatabaseHelper", "Database copied successfully!");
+        } catch (IOException e) {
+            Log.e("DatabaseHelper", "Error copying database", e);
+        }
     }
 
     public void addSongToSongList(String tableName, String title, String songAuthor, String songLyricsAndChords, byte[] songImageCover, int orientation) {

@@ -4,8 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/additional_background_for_rest"
+    android:background="@color/black"
     tools:context=".Activities.ViewSong">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@mipmap/design"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/todo" />
 
     <TextView
         android:id="@+id/songTitle"
@@ -17,6 +25,7 @@
         android:textSize="30sp"
         android:textAlignment="center"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:text="@string/song_title" />
 
     <TextView
@@ -29,6 +38,7 @@
         android:layout_marginHorizontal="20sp"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/light_gray_text"
         android:layout_below="@id/songTitle"
         android:text="@string/song_author" />
 
@@ -41,9 +51,9 @@
         android:layout_margin="20sp"
         android:layout_marginStart="20sp"
         android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
         android:scrollbars="vertical"
         android:text="@string/lyrics_and_chords"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
 

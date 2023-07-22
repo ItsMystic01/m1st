@@ -7,7 +7,8 @@
     android:padding="10dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="10dp"
-    app:cardBackgroundColor="@color/peach"
+    app:cardBackgroundColor="@color/gray_text"
+    android:background="@mipmap/design"
     android:layout_margin="5dp">
 
     <RelativeLayout
@@ -50,6 +51,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/author_name"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textStyle="bold|italic" />
 

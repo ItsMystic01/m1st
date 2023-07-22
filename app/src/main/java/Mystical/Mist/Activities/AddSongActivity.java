@@ -180,13 +180,13 @@ public class AddSongActivity extends AppCompatActivity {
     }
 
     public void setStyleOnNoFocusAndEmpty(View view, TextInputLayout layout) {
-        layout.setBoxBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.cream));
+        layout.setBoxBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.gray_text));
         layout.setError("Fill out this field!");
-        layout.setStartIconTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.battleship_gray)));
+        layout.setStartIconTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.light_gray_text)));
     }
 
     public void setStyleOnNoFocus(View view, TextInputLayout layout) {
-        layout.setStartIconTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.battleship_gray)));
+        layout.setStartIconTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.light_gray_text)));
     }
 
     public void setStyleOnFocus(View view, TextInputLayout layout) {

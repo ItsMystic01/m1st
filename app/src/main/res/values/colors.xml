@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#1d1d1f</color>
+    <color name="white">#f5f5f7</color>
     <color name="peach">#DB7558</color>
     <color name="maroon">#302326</color>
     <color name="gray">#A8A196</color>
     <color name="red">#FF0000</color>
-    <color name="battleship_gray">#848482</color>
     <color name="cream">#ffe4c4</color>
+    <color name="black_text">#212121</color>
+    <color name="gray_text">#666666</color>
+    <color name="battleship_gray">#848482</color>
+    <color name="light_gray_text">#9E9E9E</color>
+    <color name="gold">#FFD700</color>
 </resources>

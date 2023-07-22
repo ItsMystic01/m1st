@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#302326"
-    android:padding="10dp"
+    android:background="@color/black"
     android:textAlignment="gravity"
     tools:context=".Activities.AddSongActivity">
 
@@ -13,7 +12,9 @@
         android:id="@+id/additional_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@mipmap/background_addition"
+        app:srcCompat="@mipmap/design"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/todo" />
 
     <ScrollView
@@ -22,7 +23,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
 
             <TextView
@@ -33,7 +35,7 @@
                 android:fontFamily="@font/barlow_condensed_bold"
                 android:text="@string/new_song"
                 android:textAlignment="center"
-                android:textColor="#DB7558"
+                android:textColor="@color/light_gray_text"
                 android:textSize="80sp"
                 android:layout_marginTop="25dp"
                 android:textStyle="bold" />
@@ -54,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/lyrics"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/peach"
+                    android:backgroundTint="@color/gray_text"
+                    app:rippleColor="@color/light_gray_text"
                     />
                 <Button
                     style="@style/SongToggleButton"
@@ -63,7 +66,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/lyrics_and_chords"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/peach"
+                    android:backgroundTint="@color/gray_text"
+                    app:rippleColor="@color/light_gray_text"
                     />
                 <Button
                     style="@style/SongToggleButton"
@@ -72,7 +76,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/chords"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/peach"
+                    android:backgroundTint="@color/gray_text"
+                    app:rippleColor="@color/light_gray_text"
                     />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -84,7 +89,7 @@
                 android:hint="@string/song_name"
                 app:startIconDrawable="@drawable/chords"
                 android:layout_marginTop="10dp"
-                app:startIconTint="@color/battleship_gray"
+                app:startIconTint="@color/white"
                 app:endIconMode="clear_text"
                 >
 
@@ -92,8 +97,8 @@
                     android:id="@+id/txtSongName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/battleship_gray"
-                    android:textColor="@color/battleship_gray"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
                     android:padding="5dp"
                     android:lines="1"
                     android:inputType="text|textNoSuggestions"
@@ -107,7 +112,7 @@
                 android:layout_below="@id/songNameTextField"
                 android:hint="@string/song_author"
                 app:startIconDrawable="@drawable/chords"
-                app:startIconTint="@color/battleship_gray"
+                app:startIconTint="@color/white"
                 app:endIconMode="clear_text"
                 >
 
@@ -115,8 +120,8 @@
                     android:id="@+id/txtSongAuthor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/battleship_gray"
-                    android:textColor="@color/battleship_gray"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
                     android:padding="5dp"
                     android:lines="1"
                     android:inputType="text|textNoSuggestions"
@@ -129,7 +134,7 @@
                 style="@style/TextInputLayout"
                 android:layout_below="@id/songAuthorTextField"
                 android:hint="@string/lyrics_and_chords"
-                app:startIconTint="@color/battleship_gray"
+                app:startIconTint="@color/white"
                 app:startIconDrawable="@drawable/chords"
                 >
 
@@ -153,7 +158,7 @@
                 android:fontFamily="@font/barlow_condensed_bold"
                 android:text=""
                 android:textAlignment="center"
-                android:textColor="#DB7558"
+                android:textColor="@color/light_gray_text"
                 android:textSize="20sp"
                 android:layout_marginBottom="5sp"
                 android:layout_marginEnd="100sp"
@@ -166,12 +171,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image_picked"
                 android:layout_centerHorizontal="true"
-                android:backgroundTint="#DB7558"
+                android:backgroundTint="@color/gray_text"
                 android:text="@string/pick_an_image"
                 android:layout_marginBottom="10dp"
                 app:strokeColor="@color/white"
                 app:strokeWidth="1dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                app:rippleColor="@color/light_gray_text"/>
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/addSongButton"
@@ -180,14 +186,15 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/addImageButton"
-                android:backgroundTint="#DB7558"
+                android:backgroundTint="@color/gray_text"
                 android:text="@string/add_song"
                 android:textColor="@color/white"
                 app:strokeColor="@color/white"
                 app:strokeWidth="1dp"
                 android:layout_marginBottom="25dp"
                 app:icon="@drawable/addition_sign"
-                app:iconTint="@color/white"/>
+                app:iconTint="@color/white"
+                app:rippleColor="@color/light_gray_text"/>
 
         </RelativeLayout>
     </ScrollView>

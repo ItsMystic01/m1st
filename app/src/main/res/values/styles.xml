@@ -13,18 +13,20 @@
     <style name="TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="boxStrokeColor">@color/peach</item>
+        <item name="boxStrokeColor">@color/white</item>
         <item name="boxCornerRadiusTopStart">10dp</item>
         <item name="boxCornerRadiusTopEnd">10dp</item>
         <item name="boxCornerRadiusBottomStart">10dp</item>
         <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="boxStrokeErrorColor">@color/light_gray_text</item>
         <item name="helperText">* Required</item>
-        <item name="helperTextTextColor">@color/red</item>
-        <item name="boxBackgroundColor">@color/cream</item>
-        <item name="hintTextColor">@color/peach</item>
+        <item name="helperTextTextColor">#CFD8DC</item>
+        <item name="boxBackgroundColor">@color/gray_text</item>
+        <item name="hintTextColor">@color/light_gray_text</item>
         <item name="errorEnabled">true</item>
         <item name="errorIconDrawable">@drawable/error</item>
-        <item name="errorTextColor">@color/red</item>
+        <item name="errorTextColor">#CFD8DC</item>
+        <item name="errorIconTint">@color/white</item>
         <item name="strokeColor">@color/white</item>
         <item name="strokeWidth">5dp</item>
     </style>

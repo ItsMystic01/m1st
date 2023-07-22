@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity"
-    android:background="@color/maroon">
+    android:background="@color/black">
 
     <ImageView
         android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@mipmap/additional_background_for_rest"
+        app:srcCompat="@mipmap/design"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/todo" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,18 +29,18 @@
         android:padding="10dp">
 
     <!-- Main content -->
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/peach"
+            android:backgroundTint="#666666"
             android:contentDescription="@string/add_song"
             app:fabCustomSize="@android:dimen/app_icon_size"
             app:fabSize="mini"
-            app:rippleColor="@color/peach"
+            app:tint="#f5f5f7"
+            app:rippleColor="#9E9E9E"
             app:srcCompat="@drawable/eye" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
