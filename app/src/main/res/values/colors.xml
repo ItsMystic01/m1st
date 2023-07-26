@@ -12,4 +12,5 @@
     <color name="battleship_gray">#848482</color>
     <color name="light_gray_text">#9E9E9E</color>
     <color name="gold">#FFD700</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
